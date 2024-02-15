@@ -3,9 +3,13 @@ import useAmorPorTi from "../../hooks/useAmorPorTi";
 import clienteAxios from "../../lib/axios"
 import InputError from "../InputError";
 import useSWR from "swr";
+import { useAuth } from "../../hooks/useAuth"
 export default function ModalCita({isEditing = false}) {
   let availablePets;
   let availableHours;
+  //vamos a obtener el usuario para saber si es admin o usuarionormal
+  const {user} = useAuth({middleware: 'auth'})
+  //hacemos destructuring
   const {handleCloseModalAppointment, appointment, createAppointment, updateAppointment} = useAmorPorTi();
   // Obtener la fecha actual en formato ISO (yyyy-mm-dd)
   const today = new Date().toISOString().split('T')[0];
@@ -67,10 +71,6 @@ export default function ModalCita({isEditing = false}) {
       })
     }
   }
-  console.log(date)
-  console.log(hour)
-  console.log(pet)
-  console.log(reason)
   return (
       <>
         <div className="flex justify-end">

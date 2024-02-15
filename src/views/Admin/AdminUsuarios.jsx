@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useAmorPorTi from "../../hooks/useAmorPorTi"
 import clienteAxios from "../../lib/axios"
 import AdminUsers from '../../components/Admin/AdminUsers';
 import useSWR from 'swr';
@@ -29,7 +30,7 @@ export default function AdminUsuarios() {
         setPage(1); // Reinicia la página a 1 cuando se realiza una nueva búsqueda
     };
 
-    if (usersDataError) return <div>Error al cargar los datos</div>
+    if (usersDataError) return <div>Demasiadas Solicitudes espera un momento</div>
 
     return (
         <div className="pt-10">

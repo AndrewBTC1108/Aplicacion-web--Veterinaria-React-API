@@ -1,5 +1,4 @@
 import useAmorPorTi from "../../hooks/useAmorPorTi";
-import Button from "../../components/Button";
 import AdminAppointment from "../../components/Admin/AdminAppointment"
 import { useState } from "react";
 import useSWR from "swr";
@@ -53,7 +52,7 @@ export default function ConsultasAdmin() {
             <div>
                 {tieneCitas ? (
                         <div className="pt-10">
-                            <h1 className="mb-4 text-center text-4xl font-black">Tus Consultas</h1>
+                            <h1 className="mb-4 text-center text-4xl font-black">Consultas</h1>
                             <table className="bg-white m-auto shadow-md rounded-md mt-10 px-5 py-10 min-w-full">
                                 <thead>
                                     <tr>
