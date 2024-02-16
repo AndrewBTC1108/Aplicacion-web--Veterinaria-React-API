@@ -1,5 +1,6 @@
-export default function AdminUsers({user}) {
+export default function AdminUser({user, modalAppointmentCreate}) {
     const {cedula, name, last_name, email, phone_number} = user;
+    const {handleClickModalAppointment} = modalAppointmentCreate;
     return (
         <>
             <tr>
@@ -17,6 +18,9 @@ export default function AdminUsers({user}) {
                     >Crear Mascota</button>
                     <button
                         className="bg-customColor hover:bg-customColorShadow text-white px-2 py-1 rounded ml-2"
+                        onClick={() => {
+                            handleClickModalAppointment(false)
+                        }}
                     >Agendar Consulta</button>
                 </td>
             </tr>

@@ -1,12 +1,12 @@
 import useAmorPorTi from "../hooks/useAmorPorTi"
 import Button from "../components/Button"
-import Mascota from "../components/Mascota";
+import Pet from "../components/Pet";
 import useSWR from "swr";
 import clienteAxios from "../lib/axios";
 import Spinner from "../components/Spinner";
 
-export default function Mascotas() {
-    let mascotas;
+export default function Pets() {
+    let Pets;
     //obtener mascotas
     const { data: availablePetsData, error: availablePetsError, isLoading } = useSWR(
         'api/pets',
@@ -24,15 +24,15 @@ export default function Mascotas() {
             }
         }
     );
-    mascotas = availablePetsData || [];
+    Pets = availablePetsData || [];
     const {handleSetPet, deletePet, handleClickModalPet} = useAmorPorTi()
     // Verificar si el objeto pets está vacío
     // asegurarnos de que mascotas esté definido antes de intentar acceder a sus propiedades.agregamos una verificación de nulidad antes de la línea
-    const tieneMascotas = Object.values(mascotas).length > 0;
+    const hasPets = Object.values(Pets).length > 0;
     if(isLoading) return(<Spinner />)
     return (
         <div className="pt-10">
-            {tieneMascotas ? (
+            {hasPets ? (
             // Renderizar el contenido del div si hay mascotas
             <div>
                 <h1 className="mb-4 text-center text-4xl font-black">Tus Mascotas</h1>
@@ -45,10 +45,10 @@ export default function Mascotas() {
                         </tr>
                     </thead>
                     <tbody>
-                        {mascotas.map(mascota => (
-                            <Mascota
-                                key={mascota.id}
-                                mascota={mascota}
+                        {Pets.map(pet => (
+                            <Pet
+                                key={pet.id}
+                                pets={pet}
                                 modalPet={{handleClickModalPet}}
                                 deletePets={{deletePet}}
                                 setPet={{handleSetPet}}

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import useAmorPorTi from "../../hooks/useAmorPorTi"
 import clienteAxios from "../../lib/axios"
-import AdminUsers from '../../components/Admin/AdminUsers';
+import AdminUser from '../../components/Admin/AdminUser';
 import useSWR from 'swr';
 import Spinner from '../../components/Spinner';
 
-export default function AdminUsuarios() {
+export default function AdminUsers() {
     const [page, setPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
+    const {handleClickModalAppointment} = useAmorPorTi()
     const fetcher = url => clienteAxios(url, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem('AUTH_TOKEN')}`
@@ -20,14 +21,14 @@ export default function AdminUsuarios() {
 
     const handlePageChange = newPage => {
         if (newPage >= 1 && newPage <= usersData.last_page) {
-            //cambia el valor de page a newPage, lo que a su vez causa que el componente se vuelva a renderizar con la nueva página de datos
+            //changes the value of page to newPage, which in turn causes the component to re-render with the new data page.
             setPage(newPage);
         }
     };
 
     const handleSearchChange = e => {
         setSearchTerm(e.target.value);
-        setPage(1); // Reinicia la página a 1 cuando se realiza una nueva búsqueda
+        setPage(1); // Resets the page to 1 when a new search is made
     };
 
     if (usersDataError) return <div>Demasiadas Solicitudes espera un momento</div>
@@ -72,9 +73,10 @@ export default function AdminUsuarios() {
                 ): (
                     <tbody>
                         {usersData.data.map(user => (
-                            <AdminUsers
+                            <AdminUser
                                 key={user.id}
                                 user={user}
+                                modalAppointmentCreate={{handleClickModalAppointment}}
                             />
                         ))}
                     </tbody>

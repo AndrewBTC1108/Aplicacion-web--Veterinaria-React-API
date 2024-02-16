@@ -4,22 +4,27 @@ import clienteAxios from "../../lib/axios"
 import InputError from "../InputError";
 import useSWR from "swr";
 import { useAuth } from "../../hooks/useAuth"
-export default function ModalCita({isEditing = false}) {
+export default function ModalAppointments({isEditing = false}) {
   let availablePets;
   let availableHours;
-  //vamos a obtener el usuario para saber si es admin o usuarionormal
-  const {user} = useAuth({middleware: 'auth'})
-  //hacemos destructuring
+  //to get user, to know if normalUser or AdminUser
+  const {user} = useAuth({})
+  if(user.admin){
+    console.log('es admin')
+  }else {
+    console.log('no es admin')
+  }
+  //destructuring
   const {handleCloseModalAppointment, appointment, createAppointment, updateAppointment} = useAmorPorTi();
-  // Obtener la fecha actual en formato ISO (yyyy-mm-dd)
+  // to get current Date ISOformat (yyyy-mm-dd)
   const today = new Date().toISOString().split('T')[0];
   //hooks
-  const [date, setDate] = useState('') //para las fechas
+  const [date, setDate] = useState('') //to Dates
   const [hour, setHour] = useState('')
   const [pet, setPet] = useState('')
   const [reason, setReason] = useState('')
   const [errors, setErrors] = useState([]);
-  // Obtener mascotas disponibles utilizando useSWR
+  // to get availablePets using useSWR
   const { data: availablePetsData, error: availablePetsError } = useSWR(
     'api/availablePets',
     async (url) => {
@@ -32,7 +37,7 @@ export default function ModalCita({isEditing = false}) {
       return response.data.data;
     }
   );
-  //obtenerHorasDisponiblessegunFecha
+  //to get available hours by Date
   const { data: hoursData, error: hoursError } = useSWR(
     date ? `api/hours?date=${date}` : null,
     async (url) => {
@@ -47,7 +52,7 @@ export default function ModalCita({isEditing = false}) {
       refreshInterval: 1000
     }
   );
-  // Utilizar availablePetsData en tu componente
+  // use availablePetsData en the component
   availablePets = availablePetsData || [];
   availableHours = hoursData || [];
   useEffect(() => {

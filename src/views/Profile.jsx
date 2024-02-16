@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useAuth } from "../hooks/useAuth"
 import InputError from "../components/InputError"
 import AuthSessionStatus from '../components/AuthSessionStatus'
-export default function Perfil() {
+export default function Profile() {
 
     //para leer lo que ingresamos a los inputs
     const [name, setName] = useState('')

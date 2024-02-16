@@ -4,13 +4,13 @@ import { useState } from "react";
 import useSWR from "swr";
 import clienteAxios from "../../lib/axios";
 import Spinner from "../../components/Spinner";
-export default function ConsultasAdmin() {
+export default function AppointmentsAdmin() {
     let availableAppointments;
-    // Obtener la fecha actual en formato ISO (yyyy-mm-dd)
+    // to get current Date ISOformat (yyyy-mm-dd)
     const today = new Date().toISOString().split('T')[0];
     //hooks
-    const [date, setDate] = useState(today) //para las fechas
-    //obtnener las citas disponibles segun la fecha seleccionada
+    const [date, setDate] = useState(today)
+    //get the available appointments according to the selected date
     const {data: availableAppointmentsData, error: availableAppointmentsError, isLoading} = useSWR(
        date ? `api/appointments?date=${date}` : null,
        async (url) => {

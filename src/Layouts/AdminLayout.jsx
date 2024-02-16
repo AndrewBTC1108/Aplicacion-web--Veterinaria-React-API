@@ -5,7 +5,7 @@ import AdminSidebar from '../components/Admin/AdminSidebar'
 import { ToastContainer } from "react-toastify"
 import useAmorPorTi from "../hooks/useAmorPorTi"
 import { customStylesModal } from "../helpers/index"
-import ModalCita from '../components/Modals/ModalCita'
+import ModalAppointments from '../components/Modals/ModalAppointments'
 //hojas de estilo css
 import "react-toastify/dist/ReactToastify.css"
 
@@ -25,7 +25,7 @@ export default function AdminLayout() {
             </div>
 
             <ReactModal isOpen={ModalAppointment.isOpen} style={customStyles}>
-                <ModalCita
+                <ModalAppointments
                     isEditing={ModalAppointment.isEditing}
                 />
             </ReactModal>

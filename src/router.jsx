@@ -6,12 +6,12 @@ import ForgotPassword from "./views/Auth/ForgotPassword";
 import PasswordReset from "./views/Auth/PasswordReset";
 import VerifyEmail from "./views/Auth/VerifyEmail";
 import AdminLayout from "./Layouts/AdminLayout";//Admin
-import ConsultasAdmin from './views/Admin/ConsultasAdmin'
-import AdminUsuarios from './views/Admin/AdminUsuarios'
+import AppointmentsAdmin from './views/Admin/AppointmentsAdmin'
+import AdminUsers from './views/Admin/AdminUsers'
 import Layout from "./Layouts/Layout";//users
-import Mascotas from "./views/Mascotas";
-import Consultas from './views/Consultas';
-import Perfil from "./views/Perfil";
+import Pets from "./views/Pets";
+import Appointments from './views/Appointments';
+import Profile from "./views/Profile";
 import NotFound from "./views/NotFound";
 
 const router = createBrowserRouter([
@@ -21,15 +21,15 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Mascotas />
+                element: <Pets />
             },
             {
                 path: '/consultas',
-                element: <Consultas />
+                element: <Appointments />
             },
             {
                 path: '/perfil',
-                element: <Perfil />
+                element: <Profile />
             }
         ]
     },
@@ -65,11 +65,11 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <ConsultasAdmin/>
+                element: <AppointmentsAdmin/>
             },
             {
                 path: '/admin/usuarios',
-                element: <AdminUsuarios />
+                element: <AdminUsers />
             }
         ]
     },

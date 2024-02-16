@@ -5,7 +5,7 @@ import {Outlet} from 'react-router-dom'
 import Sidebar from "../components/Sidebar"
 import { ToastContainer } from "react-toastify"
 import ModalPet from "../components/Modals/ModalPet"
-import ModalCita from "../components/Modals/ModalCita"
+import ModalAppointments from "../components/Modals/ModalAppointments"
 import { customStylesModal } from "../helpers/index"
 //hojas de estilo css
 import "react-toastify/dist/ReactToastify.css"
@@ -36,7 +36,7 @@ export default function Layout() {
             </ReactModal>
 
             <ReactModal isOpen={ModalAppointment.isOpen} style={customStyles}>
-                <ModalCita
+                <ModalAppointments
                     isEditing={ModalAppointment.isEditing}
                 />
             </ReactModal>

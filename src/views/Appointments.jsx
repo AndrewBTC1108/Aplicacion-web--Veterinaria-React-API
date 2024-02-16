@@ -5,7 +5,7 @@ import useSWR from "swr";
 import clienteAxios from "../lib/axios";
 import Spinner from "../components/Spinner";
 
-export default function Consultas() {
+export default function Appointments() {
     let appointments;
     const {data: appointmentsData, error: appointmentsDataError, isLoading} = useSWR(
         'api/appointments',
@@ -24,11 +24,11 @@ export default function Consultas() {
     );
     appointments = appointmentsData || [];
     const {handleSetAppointment, handleClickModalAppointment, deleteAppointment} = useAmorPorTi()
-    const tieneCitas = Object.values(appointments).length > 0;
+    const hasAppointments = Object.values(appointments).length > 0;
     if(isLoading) return(<Spinner />)
     return (
         <div className="pt-10">
-            {tieneCitas ? (
+            {hasAppointments ? (
                     <div>
                         <h1 className="mb-4 text-center text-4xl font-black">Tus Consultas</h1>
                         <table className="bg-white m-auto shadow-md rounded-md mt-10 px-5 py-10 min-w-full">
