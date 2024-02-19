@@ -1,5 +1,6 @@
-export default function AdminUser({user, modalAppointmentCreate}) {
+export default function AdminUser({user, handleUser, modalAppointmentCreate}) {
     const {cedula, name, last_name, email, phone_number} = user;
+    const {handlesetIdUser} = handleUser
     const {handleClickModalAppointment} = modalAppointmentCreate;
     return (
         <>
@@ -19,6 +20,7 @@ export default function AdminUser({user, modalAppointmentCreate}) {
                     <button
                         className="bg-customColor hover:bg-customColorShadow text-white px-2 py-1 rounded ml-2"
                         onClick={() => {
+                            handlesetIdUser(user.id)
                             handleClickModalAppointment(false)
                         }}
                     >Agendar Consulta</button>

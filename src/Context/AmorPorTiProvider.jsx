@@ -2,13 +2,13 @@ import { createContext, useState, useEffect } from "react"
 import {toast} from 'react-toastify' //contiene el evento y tipo de toast que se quiere usar
 import clienteAxios from '../lib/axios'
 import useSWR, { mutate } from "swr";
-
 const AmorPorTiContext = createContext();
 
 const AmorPorTiProvider = ({children}) => {
     // //hooks
     const [mascota, setMascota] = useState({})//empieza como un objeto vacio
     const [appointment, setAppointment] = useState({})
+    const [userId, setUserId] = useState('')
     //para modals
     const [modalPet, setModalPet] = useState({ isOpen: false, isEditing: false});
     const [ModalAppointment, setModalAppointment] = useState({isOpen: false, isEditing: false});
@@ -91,11 +91,11 @@ const AmorPorTiProvider = ({children}) => {
     }
     /*********************************************************************************************************************************/
     /***********************************************Area Consultas*********************************************************************/
-    const createAppointment = async ({setErrors, ...props}) => {
+    const createAppointment = async ({setErrors, id = null, ...props}) => {
         const token = localStorage.getItem('AUTH_TOKEN');
         if(token){
             try {
-                const {data} = await clienteAxios.post('api/appointments', props,
+                const {data} = await clienteAxios.post('api/appointments', {...props, user_id: id},
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -171,6 +171,10 @@ const AmorPorTiProvider = ({children}) => {
     const handleSetAppointment = appointment => {
         setAppointment(appointment)
     }
+    //arrow function to get user id
+    const handlesetIdUser = id => {
+        setUserId(id)
+    }
     // // //tomar el id de la categoria a la que se da click
     // const handleClickCategory = id => {/***********************/
     //     const categoria = categorias.filter(categoria => categoria.id === id)[0]
@@ -200,6 +204,8 @@ const AmorPorTiProvider = ({children}) => {
                 modalPet,
                 handleClickModalPet,
                 handleCloseModalPet,
+                handlesetIdUser,
+                userId,
                 createPet,
                 updatePet,
                 deletePet,

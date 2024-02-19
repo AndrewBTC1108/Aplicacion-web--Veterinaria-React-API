@@ -7,15 +7,10 @@ import { useAuth } from "../../hooks/useAuth"
 export default function ModalAppointments({isEditing = false}) {
   let availablePets;
   let availableHours;
-  //to get user, to know if normalUser or AdminUser
   const {user} = useAuth({})
-  if(user.admin){
-    console.log('es admin')
-  }else {
-    console.log('no es admin')
-  }
   //destructuring
-  const {handleCloseModalAppointment, appointment, createAppointment, updateAppointment} = useAmorPorTi();
+  const {handleCloseModalAppointment, appointment, createAppointment, updateAppointment, userId} = useAmorPorTi();
+  console.log(userId)
   // to get current Date ISOformat (yyyy-mm-dd)
   const today = new Date().toISOString().split('T')[0];
   //hooks
@@ -26,7 +21,7 @@ export default function ModalAppointments({isEditing = false}) {
   const [errors, setErrors] = useState([]);
   // to get availablePets using useSWR
   const { data: availablePetsData, error: availablePetsError } = useSWR(
-    'api/availablePets',
+    `api/availablePets?userId=${userId}`,
     async (url) => {
       const token = localStorage.getItem('AUTH_TOKEN');
       const response = await clienteAxios(url, {
@@ -67,7 +62,9 @@ export default function ModalAppointments({isEditing = false}) {
     if(isEditing){
       updateAppointment(appointment.id, setErrors, date, hour, reason)
     }else {
+      const id = user.admin ? userId : user.id;
       createAppointment({
+        id,
         date,
         pet_id: pet,
         hour_id: hour,

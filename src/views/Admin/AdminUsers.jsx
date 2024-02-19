@@ -8,7 +8,7 @@ import Spinner from '../../components/Spinner';
 export default function AdminUsers() {
     const [page, setPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
-    const {handleClickModalAppointment} = useAmorPorTi()
+    const {handleClickModalAppointment, handlesetIdUser} = useAmorPorTi()
     const fetcher = url => clienteAxios(url, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem('AUTH_TOKEN')}`
@@ -76,6 +76,7 @@ export default function AdminUsers() {
                             <AdminUser
                                 key={user.id}
                                 user={user}
+                                handleUser={{handlesetIdUser}}
                                 modalAppointmentCreate={{handleClickModalAppointment}}
                             />
                         ))}
