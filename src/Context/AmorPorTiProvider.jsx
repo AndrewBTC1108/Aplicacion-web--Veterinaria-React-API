@@ -14,12 +14,12 @@ const AmorPorTiProvider = ({children}) => {
     const [ModalAppointment, setModalAppointment] = useState({isOpen: false, isEditing: false});
     /***********************************************Area Mascotas*********************************************************************/
     //Crear Mascotas
-    const createPet = async ({setErrors, ...props}) => {
+    const createPet = async ({setErrors, id = null, ...props}) => {
         //token
         const token = localStorage.getItem('AUTH_TOKEN');
         if(token){
             try {
-                const {data} = await clienteAxios.post('api/pets', props, 
+                const {data} = await clienteAxios.post('api/pets', {...props, user_id: id},
                     {
                         headers: {
                             Authorization: `Bearer ${token}`
@@ -72,7 +72,7 @@ const AmorPorTiProvider = ({children}) => {
         }
     };
     //Eliminar Mascotas
-    const deletePet = async (id) => {
+    const deletePet = async id => {
         const token = localStorage.getItem('AUTH_TOKEN');
         if(token) {
             try {

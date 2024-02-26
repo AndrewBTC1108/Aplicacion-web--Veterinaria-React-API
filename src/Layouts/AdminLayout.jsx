@@ -6,13 +6,14 @@ import { ToastContainer } from "react-toastify"
 import useAmorPorTi from "../hooks/useAmorPorTi"
 import { customStylesModal } from "../helpers/index"
 import ModalAppointments from '../components/Modals/ModalAppointments'
+import ModalPet from '../components/Modals/ModalPet'
 //hojas de estilo css
 import "react-toastify/dist/ReactToastify.css"
 
 export default function AdminLayout() {
     useAuth({middleware: 'admin'})
 
-    const {ModalAppointment} = useAmorPorTi()
+    const {ModalAppointment, modalPet} = useAmorPorTi()
     const {customStyles} = customStylesModal()
     return (
         <>
@@ -23,6 +24,12 @@ export default function AdminLayout() {
                     <Outlet />
                 </main>
             </div>
+
+            <ReactModal isOpen={modalPet.isOpen} style={customStyles}>
+                <ModalPet
+                    isEditing={modalPet.isEditing}
+                />
+            </ReactModal>
 
             <ReactModal isOpen={ModalAppointment.isOpen} style={customStyles}>
                 <ModalAppointments

@@ -7,6 +7,7 @@ import Spinner from "../components/Spinner";
 
 export default function Pets() {
     let Pets;
+    const {handleSetPet, deletePet, handleClickModalPet} = useAmorPorTi()
     //obtener mascotas
     const { data: availablePetsData, error: availablePetsError, isLoading } = useSWR(
         'api/pets',
@@ -25,7 +26,6 @@ export default function Pets() {
         }
     );
     Pets = availablePetsData || [];
-    const {handleSetPet, deletePet, handleClickModalPet} = useAmorPorTi()
     // Verificar si el objeto pets está vacío
     // asegurarnos de que mascotas esté definido antes de intentar acceder a sus propiedades.agregamos una verificación de nulidad antes de la línea
     const hasPets = Object.values(Pets).length > 0;

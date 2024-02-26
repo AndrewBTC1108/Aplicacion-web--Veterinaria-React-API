@@ -22,6 +22,9 @@ export default function Pet({pets, modalPet, setPet, deletePets}) {
                         onClick={() => deletePet(pets.id)} 
                         className="bg-red-500 hover:bg-red-800 text-white px-2 py-1 rounded ml-2"
                     >Eliminar</button>
+                    <button 
+                        className="bg-yellow-500 hover:bg-yellow-800 text-white px-2 py-1 rounded ml-2"
+                    >Mas Info..</button>
                 </td>
             </tr>
         </>

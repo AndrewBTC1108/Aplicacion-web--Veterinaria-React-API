@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import useAmorPorTi from "../../hooks/useAmorPorTi";
 import InputError from "../InputError";
+import { useAuth } from "../../hooks/useAuth"
 import {toast} from 'react-toastify' //contiene el evento y tipo de toast que se quiere usar
 
 export default function ModalPet({isEditing = false}) {
-    // console.log("isEditing:", isEditing);
-    const { handleCloseModalPet, createPet, updatePet, mascota } = useAmorPorTi();
+    const { handleCloseModalPet, createPet, updatePet, mascota, userId } = useAmorPorTi();
+    const {user} = useAuth({})
+    console.log(userId);
     // Errores
     const [errors, setErrors] = useState([]);
     // Información de la mascota
@@ -58,17 +60,19 @@ export default function ModalPet({isEditing = false}) {
 
         // Lógica para determinar si es una nueva mascota o una actualización
         if (isEditing) {
-        updatePet(mascota.id, setErrors, name, birthDate, selectedSpecies, breed, color, sex);
+            updatePet(mascota.id, setErrors, name, birthDate, selectedSpecies, breed, color, sex);
         } else {
-        createPet({
-            name,
-            birth_date: birthDate,
-            species: selectedSpecies,
-            breed,
-            color,
-            sex,
-            setErrors,
-        });
+            const id = user.admin ? userId : user.id;
+            createPet({
+                id,
+                name,
+                birth_date: birthDate,
+                species: selectedSpecies,
+                breed,
+                color,
+                sex,
+                setErrors,
+            });
         }
     };
     return (

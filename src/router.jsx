@@ -8,6 +8,7 @@ import VerifyEmail from "./views/Auth/VerifyEmail";
 import AdminLayout from "./Layouts/AdminLayout";//Admin
 import AppointmentsAdmin from './views/Admin/AppointmentsAdmin'
 import AdminUsers from './views/Admin/AdminUsers'
+import PetsUser from "./views/Admin/PetsUser";
 import Layout from "./Layouts/Layout";//users
 import Pets from "./views/Pets";
 import Appointments from './views/Appointments';
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
             {
                 path: '/admin/usuarios',
                 element: <AdminUsers />
+            },
+            {
+                path: '/admin/petsUser',
+                element: <PetsUser />
             }
         ]
     },
