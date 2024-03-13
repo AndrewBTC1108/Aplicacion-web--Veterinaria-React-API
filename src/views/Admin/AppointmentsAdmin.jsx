@@ -1,5 +1,5 @@
 import useAmorPorTi from "../../hooks/useAmorPorTi";
-import AdminAppointment from "../../components/Admin/AdminAppointment"
+import Appointment from "../../components/Appointment"
 import { useState } from "react";
 import useSWR from "swr";
 import clienteAxios from "../../lib/axios";
@@ -25,7 +25,7 @@ export default function AppointmentsAdmin() {
        }
     );
     availableAppointments = availableAppointmentsData ? availableAppointmentsData.data : [];
-    const tieneCitas = Object.values(availableAppointments).length > 0;
+    const hasAppointments = Object.values(availableAppointments).length > 0;
     if(isLoading) return(<Spinner />)
     return (
         <div className="pt-10 text-center">
@@ -48,7 +48,7 @@ export default function AppointmentsAdmin() {
             </div>
 
             <div>
-                {tieneCitas ? (
+                {hasAppointments ? (
                         <div className="pt-10">
                             <h1 className="mb-4 text-center text-4xl font-black">Consultas</h1>
                             <div className="overflow-auto">
@@ -63,7 +63,7 @@ export default function AppointmentsAdmin() {
                                     </thead>
                                     <tbody>
                                         {availableAppointments.map(appointment => (
-                                            <AdminAppointment
+                                            <Appointment
                                                 key={appointment.id}
                                                 appointment={appointment}
                                                 modalAppointment={{handleClickModalAppointment}}
